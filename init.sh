@@ -4,16 +4,12 @@ log () {
   echo "${1}"
 }
 
-log "Fetching setup_environment.sh"
-curl -s https://gist.githubusercontent.com/suppaduppax/e7084b1a7b538c08b95a43b03d7430f7/raw/a15e6fcf399130626b4745ca5df28ef37726bfc8/setup_environment.sh > setup_environment.sh
-chmod +x setup_environment.sh
-
 directories=(
-  "inventory" 
-  "inventory/group_vars/all" 
-  "inventory/host_vars/" 
-  "roles/" 
-  "collections/" 
+  "inventory"
+  "inventory/group_vars/all"
+  "inventory/host_vars/"
+  "roles/"
+  "collections/"
 )
 
 files=(
@@ -31,3 +27,24 @@ for file in "${files[@]}"; do
   log "  ${file}"
   mkdir "${file}" -p
 done
+
+log "Fetching files..."
+
+log "  ansible.cfg"
+curl -s "https://github.com/suppaduppax/ansible-init-project/raw/main/ansible.cfg" > ansible.cfg
+
+log "  hosts.vmware.yml"
+curl -s "https://github.com/suppaduppax/ansible-init-project/raw/main/inventory/hosts.vmware.yml" > inventory/hosts.vmware.yml
+
+log "  galaxy_requirements.yml"
+curl -s "https://github.com/suppaduppax/ansible-init-project/raw/main/galaxy_requirements.yml" > galaxy_requirements.yml
+
+log "  pip_requirements.yml"
+curl -s "https://github.com/suppaduppax/ansible-init-project/raw/main/pip_requirements.txt" > pip_requirements.txt
+
+log "  setup_environment.sh"
+curl -s https://gist.githubusercontent.com/suppaduppax/e7084b1a7b538c08b95a43b03d7430f7/raw/a15e6fcf399130626b4745ca5df28ef37726bfc8/setup_environment.sh > setup_environment.sh
+chmod +x setup_environment.sh
+
+log "Running setup_environment.sh..."
+source setup_environment.sh
