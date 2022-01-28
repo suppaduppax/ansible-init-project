@@ -3,11 +3,11 @@ wget https://gist.githubusercontent.com/suppaduppax/e7084b1a7b538c08b95a43b03d74
 chmod +x setup_environment.sh
 
 directories=(
-  "inventory",
-  "inventory/group_vars/all",
-  "inventory/host_vars/",
-  "roles/",
-  "collections/",
+  "inventory"
+  "inventory/group_vars/all"
+  "inventory/host_vars/"
+  "roles/"
+  "collections/"
 )
 
 for dir in "${directories}"; do
