@@ -12,7 +12,7 @@ directories=(
   "collections/" 
 )
 
-for dir in "${directories}"; do
+for dir in "${directories[@]}"; do
   mkdir "${dir}" -p
 done
 
