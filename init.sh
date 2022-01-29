@@ -9,7 +9,7 @@ directories=(
   "inventory/group_vars/all"
   "inventory/host_vars/"
   "roles/"
-  "collections/"
+  "collections/ansible_collections"
 )
 
 files=(
@@ -48,3 +48,9 @@ chmod +x setup_environment.sh
 
 log "Running setup_environment.sh..."
 source setup_environment.sh
+
+log "Adding venv to .gitignore"
+ignore_line="*_venv/"
+if [ -z ".gitignore" ] || [ -z $(cat .gitignore | grep "${ignore_line}") ]; then
+  echo "${ignore_line}" >> .gitignore  
+fi
